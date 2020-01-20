@@ -42,6 +42,7 @@
             android:layout_weight="1"
             android:onClick="change_window"
             android:text="change" />
+
     </LinearLayout>
 
     <LinearLayout

@@ -1,5 +1,6 @@
 package com.geekteck.testcalculator;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -22,24 +23,25 @@ public class LaunchActivity extends AppCompatActivity {
 
         result_tv = findViewById(R.id.launch_tv);
 
-        Intent intent = getIntent();
-
-        if (intent != null) {
-            resultCalc = intent.getStringExtra("result");
-            if (resultCalc != null) {
-                result_tv.setText(resultCalc);
-            } else {
-                result_tv.setText("error");
-            }
-
-        }
-
     }
-
 
 
     public void calc_activity_change(View view) {
         startActivity(new Intent(this, MainActivity.class));
     }
 
+    public void change_window(View view) {
+        String resu = result_tv.getText().toString();
+        Intent intent = new Intent(this, LaunchActivity.class);
+        intent.putExtra("result", resu);
+        startActivityForResult(intent, 42);
+    }
+
+
+
+    public void getAnswer(View view) {
+        Intent intent = getIntent();
+        resultCalc= intent.getStringExtra("result");
+        result_tv.setText(resultCalc);
+    }
 }
