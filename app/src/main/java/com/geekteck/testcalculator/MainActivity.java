@@ -1,6 +1,7 @@
 package com.geekteck.testcalculator;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
@@ -140,19 +141,15 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void send() {
-        String resu = textView.getText().toString();
-        Intent intent = new Intent(this, LaunchActivity.class);
-        intent.putExtra("result", resu);
-        startActivityForResult(intent, 42);
+    public void change_window(View view) {
+        String resultat = textView.getText().toString();
+        Intent intent = new Intent();
+        setResult(RESULT_OK,intent);
+        intent.putExtra("result", resultat);
+        finish();
+
     }
 
-    public void change_window(View view) {
-        String resu = textView.getText().toString();
-        Intent intent = new Intent(this, LaunchActivity.class);
-        intent.putExtra("result", resu);
-        startActivityForResult(intent, 42);
-    }
 
 
 }

@@ -12,8 +12,6 @@ import android.widget.TextView;
 
 public class LaunchActivity extends AppCompatActivity {
     TextView result_tv;
-    Button share, get;
-    String resultCalc;
 
 
     @Override
@@ -27,21 +25,21 @@ public class LaunchActivity extends AppCompatActivity {
 
 
     public void calc_activity_change(View view) {
-        startActivity(new Intent(this, MainActivity.class));
+        Intent intent=new Intent(this, MainActivity.class);
+        startActivityForResult(intent,2);
     }
 
-    public void change_window(View view) {
-        String resu = result_tv.getText().toString();
-        Intent intent = new Intent(this, LaunchActivity.class);
-        intent.putExtra("result", resu);
-        startActivityForResult(intent, 42);
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==2 && resultCode==RESULT_OK && data!=null){
+            String putResult=data.getStringExtra("result");
+            result_tv.setText(putResult);
+        }
+
     }
 
 
 
-    public void getAnswer(View view) {
-        Intent intent = getIntent();
-        resultCalc= intent.getStringExtra("result");
-        result_tv.setText(resultCalc);
-    }
+
 }
